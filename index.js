@@ -102,7 +102,7 @@ function send(packet, options, callback) {
   // Message handler
 
   socket.on('message', function(msg, rinfo) {
-
+    clearTimeout(t);
     debug('Received RADIUS response', rinfo);
 
     // Closing socket since we don't need it anymore
@@ -132,8 +132,6 @@ function send(packet, options, callback) {
     if (!isValid) return callback(new Error('RADIUS response is invalid'));
 
     callback(null, response);
-    clearTimeout(t);
-
   });
 
   // Send packet after binding is done (listening)
